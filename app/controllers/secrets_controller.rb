@@ -8,7 +8,7 @@ class SecretsController < ApplicationController
 
   def create
     params[:secret][:author_id] = current_user.id
-   # params[:secret].merge({:author_id => current_user.id})
+    params[:secret][:recipient_id] = params[:user_id]
     @secret = Secret.create!(params[:secret])
 
     respond_to do |format|

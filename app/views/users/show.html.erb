@@ -6,3 +6,5 @@
     <li><%= secret.title %></li>
   <% end %>
 </ul>
+
+<%= render partial: 'forms/form', :locals => {:user => @user}%>
