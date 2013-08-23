@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130620163148) do
+ActiveRecord::Schema.define(:version => 20130823185419) do
+
+  create_table "friendships", :force => true do |t|
+    t.integer  "friender_id", :null => false
+    t.integer  "friendee_id", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "friendships", ["friendee_id"], :name => "index_friendships_on_friendee_id"
+  add_index "friendships", ["friender_id"], :name => "index_friendships_on_friender_id"
 
   create_table "secrets", :force => true do |t|
     t.string   "title",        :null => false

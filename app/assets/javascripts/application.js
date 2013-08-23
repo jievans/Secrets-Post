@@ -12,5 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.serializeJSON.min
 //= require underscore
 //= require_tree .

@@ -1,0 +1,38 @@
+<h3>Users Index</h3>
+
+<% @users.each do |user| %>
+<% next if current_user.id == user.id %>
+  <div>
+    <%= user.username %>
+    <!-- add form id, hidden fields for friend / friendee id -->
+
+    <form action="<%= user_friendship_url(user) %>" class="friend-form">
+      <input type="hidden" name="friendship[friendee_id]"
+             value="<%= user.id %>">
+    <% status = @friend_ids.include?(user.id) ? "friended" : "unfriended" %>
+
+      <input type="submit" value="add friend" data-status="<%=status%>">
+    </form>
+
+  </div>
+<% end %>
+
+<script>
+  $(".friend-form").find('input[type="submit"]').on("click", function(event) {
+    event.preventDefault();
+
+    var $button = $(this);
+    $button.attr("disabled", "disabled");
+    $button.attr("value", "Friending...");
+    var url = $(this.form).attr('action');
+
+    $.ajax({
+      url: url,
+      type: "POST",
+      success: function(response) {
+        console.log(response);
+        $button.attr("value", "Friended!");
+      }
+    });
+  });
+</script>

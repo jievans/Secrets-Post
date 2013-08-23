@@ -12,6 +12,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    @friend_ids = current_user.friendships.pluck(:friendee_id)
+    @users = User.all
+  end
+
   def new
     @user = User.new
   end

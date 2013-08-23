@@ -3,5 +3,8 @@ AjaxDemo::Application.routes.draw do
 
   resources :secrets
   resource :session
-  resources :users
+  resources :users do
+    resources :secrets
+    resource :friendship, :only => [:create, :destroy]
+  end
 end
